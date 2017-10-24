@@ -4,13 +4,14 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import ReduxPromise from 'redux-promise';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import thunk from 'redux-thunk';
 
 import reducers from './reducers';
 import Posts from './containers/posts';
 import SinglePost from './containers/post';
 import PostNew from './containers/post_new';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise, thunk)(createStore);
 
 
 ReactDOM.render(
