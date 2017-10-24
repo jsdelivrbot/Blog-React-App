@@ -1,10 +1,12 @@
 import axios from 'axios';
 
 export const GET_POSTS = 'getPosts';
+export const GET_SINGLE_POST = 'getSinglePost';
 export const CREATE_POST = 'createPost';
+export const DELETE_POST = 'deletePost';
 
 const ROOT_URL = 'https://reduxblog.herokuapp.com/api';
-const API_KEY = '?key=PAPERCLIP1234';
+const API_KEY = '?key=SHAON1234';
 
 export function getPosts () {
     return {
@@ -20,5 +22,22 @@ export function createPost (values, callback) {
     return {
         type: CREATE_POST,
         payload: request
+    };
+}
+
+export function getSinglePost (id) {
+    return {
+        type: GET_SINGLE_POST,
+        payload: axios.get(ROOT_URL + '/posts/' + id + API_KEY)
+    };
+}
+
+export function deletePost (id, callback) {
+    const request = axios
+        .delete(ROOT_URL + '/posts/' + id + API_KEY)
+        .then(callback);
+    return {
+        type: DELETE_POST,
+        payload: id
     };
 }
